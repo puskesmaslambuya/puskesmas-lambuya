@@ -1,10 +1,8 @@
 import type {
   HeroSlide,
   LayananItem,
-  BeritaItem,
   JadwalItem,
   StatistikItem,
-  GaleriPreviewItem,
 } from "@/types/home";
 
 /**
@@ -79,38 +77,11 @@ export const LAYANAN_UNGGULAN: LayananItem[] = [
   },
 ];
 
-export const BERITA_TERBARU: BeritaItem[] = [
-  {
-    id: "berita-1",
-    slug: "vaksinasi-anak-2026",
-    category: "Kesehatan Anak",
-    title: "Jadwal Vaksinasi Anak Bulan Ini Telah Dibuka",
-    excerpt:
-      "Puskesmas Lambuya membuka jadwal imunisasi rutin untuk balita di seluruh posyandu wilayah kerja.",
-    date: "2026-07-10",
-    coverColor: "from-primary/20 to-primary/5",
-  },
-  {
-    id: "berita-2",
-    slug: "posyandu-lansia-juli",
-    category: "Kegiatan",
-    title: "Posyandu Lansia Digelar Serentak di 5 Desa",
-    excerpt:
-      "Pemeriksaan kesehatan gratis bagi lansia dilaksanakan bekerja sama dengan kader posyandu setempat.",
-    date: "2026-07-05",
-    coverColor: "from-secondary/20 to-secondary/5",
-  },
-  {
-    id: "berita-3",
-    slug: "tips-cegah-dbd",
-    category: "Artikel Kesehatan",
-    title: "Tips Mencegah Demam Berdarah di Musim Hujan",
-    excerpt:
-      "Kenali langkah 3M Plus untuk melindungi keluarga Anda dari penyakit demam berdarah dengue.",
-    date: "2026-06-28",
-    coverColor: "from-primary/20 to-secondary/5",
-  },
-];
+/**
+ * Data berita dipindahkan ke lib/data/berita.ts sebagai satu-satunya sumber data,
+ * dipakai bersama oleh Beranda (components/home/BeritaTerbaru.tsx) dan
+ * halaman Informasi > Berita. Gunakan getBeritaTerbaru(limit) dari file tersebut.
+ */
 
 export const JADWAL_PELAYANAN: JadwalItem[] = [
   { id: "j1", poli: "Poli Umum", hari: "Senin - Kamis", jam: "08.00 - 14.00 WITA" },
@@ -128,9 +99,8 @@ export const STATISTIK_PUSKESMAS: StatistikItem[] = [
   { id: "s4", label: "Tingkat Kepuasan", value: 94, suffix: "%" },
 ];
 
-export const GALERI_PREVIEW: GaleriPreviewItem[] = [
-  { id: "g1", caption: "Gedung Pelayanan Utama", color: "bg-primary/15" },
-  { id: "g2", caption: "Kegiatan Posyandu", color: "bg-secondary/15" },
-  { id: "g3", caption: "Ruang Pemeriksaan Umum", color: "bg-primary/10" },
-  { id: "g4", caption: "Vaksinasi Massal", color: "bg-secondary/10" },
-];
+/**
+ * Data galeri dipindahkan ke lib/data/galeri.ts sebagai satu-satunya sumber data,
+ * dipakai bersama oleh Beranda (components/home/GaleriPreview.tsx) dan halaman Galeri.
+ * Gunakan getFotoPreview(limit) dari file tersebut.
+ */

@@ -24,15 +24,7 @@ export type LayananItem = {
     | "promkes";
 };
 
-export type BeritaItem = {
-  id: string;
-  slug: string;
-  category: string;
-  title: string;
-  excerpt: string;
-  date: string; // ISO date string
-  coverColor: string; // dipakai untuk placeholder visual sebelum ada foto asli
-};
+/** Tipe lengkap berita ada di types/berita.ts (dipakai bersama Beranda & Informasi > Berita). */
 
 export type JadwalItem = {
   id: string;
@@ -48,8 +40,4 @@ export type StatistikItem = {
   suffix?: string;
 };
 
-export type GaleriPreviewItem = {
-  id: string;
-  caption: string;
-  color: string; // placeholder warna sebelum ada foto asli
-};
+/** Tipe lengkap galeri (Foto & Video) ada di types/galeri.ts (dipakai bersama Beranda & halaman Galeri). */

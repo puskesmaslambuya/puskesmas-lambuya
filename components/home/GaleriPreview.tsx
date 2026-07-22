@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { ArrowRightIcon, PhotoIcon } from "@heroicons/react/24/outline";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { GALERI_PREVIEW } from "@/lib/data/home";
+import { getFotoPreview } from "@/lib/data/galeri";
 import { cn } from "@/lib/utils";
 
 export default function GaleriPreview() {
+  const foto = getFotoPreview(4);
+
   return (
     <section className="section-y bg-white">
       <div className="container-page">
@@ -24,11 +26,11 @@ export default function GaleriPreview() {
         </div>
 
         <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
-          {GALERI_PREVIEW.map((item) => (
+          {foto.map((item) => (
             <div
               key={item.id}
               className={cn(
-                "group relative aspect-square overflow-hidden rounded-2xl",
+                "group relative aspect-square overflow-hidden rounded-2xl bg-gradient-to-br",
                 item.color
               )}
             >
