@@ -2,13 +2,15 @@
 
 Dibangun dengan Next.js (App Router) + TypeScript + Tailwind CSS + Supabase.
 
-## Status: Tahap 2 — Halaman Beranda
+## Status: Tahap 3 — Halaman Profil
 
 Sudah tersedia:
 - Tahap 1: struktur proyek, konfigurasi, routing dasar, layout, Navbar, Footer
 - Tahap 2: Halaman Beranda lengkap (Hero Banner, Sambutan Kepala Puskesmas, Layanan
   Unggulan, Berita Terbaru, Jadwal Pelayanan, Statistik, Galeri, Survey Kepuasan,
   Pengaduan, Google Maps)
+- Tahap 3: Halaman Profil (Sejarah, Visi & Misi, Motto, Maklumat Pelayanan, Struktur
+  Organisasi, SDM, Wilayah Kerja, Akreditasi) dengan sub-navigasi anchor sticky
 
 ## Menjalankan Proyek
 
