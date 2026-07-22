@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { createServerClient } from "@supabase/ssr";
+import { createServerClient, type CookieOptions } from "@supabase/ssr";
 
 /**
  * Supabase client untuk digunakan di Server Component, Server Action, atau Route Handler.
@@ -16,10 +16,10 @@ export function createSupabaseServerClient() {
         get(name: string) {
           return cookieStore.get(name)?.value;
         },
-        set(name: string, value: string, options) {
+        set(name: string, value: string, options: CookieOptions) {
           cookieStore.set({ name, value, ...options });
         },
-        remove(name: string, options) {
+        remove(name: string, options: CookieOptions) {
           cookieStore.set({ name, value: "", ...options });
         },
       },

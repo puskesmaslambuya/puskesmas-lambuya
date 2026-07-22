@@ -1,6 +1,6 @@
 /**
  * Tipe-tipe global. Tipe khusus per fitur (Berita, Galeri, dll.)
- * akan ditambahkan pada tahap masing-masing di folder `types/` atau `features/*/types.ts`.
+ * akan ditambahkan pada tahap masing-masing di folder types/ pada fitur terkait.
  */
 
 export type OperationalHour = {

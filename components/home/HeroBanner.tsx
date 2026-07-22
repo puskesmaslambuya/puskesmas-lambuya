@@ -23,7 +23,11 @@ export default function HeroBanner() {
     return () => clearInterval(timer);
   }, []);
 
-  const slide = HERO_SLIDES[activeIndex];
+  const slide = HERO_SLIDES[activeIndex] ?? HERO_SLIDES[0];
+
+  if (!slide) {
+    return null;
+  }
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50">
