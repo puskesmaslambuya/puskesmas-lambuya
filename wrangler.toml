@@ -1,7 +1,7 @@
 # Konfigurasi Cloudflare Pages / Wrangler.
 # compatibility_flags "nodejs_compat" WAJIB agar @supabase/supabase-js & @supabase/ssr
 # (yang memakai sebagian API Node.js) bisa berjalan di Cloudflare Edge Runtime.
-name = "website-puskesmas-lambuya"
+name = "puskesmas-lambuya"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
