@@ -9,13 +9,58 @@ import {
 import PageHeader from "@/components/ui/PageHeader";
 import KontakInfoItem from "@/components/kontak/KontakInfoItem";
 import { SITE_CONFIG } from "@/lib/constants";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Kontak",
   description: "Informasi kontak, lokasi, dan jam pelayanan Puskesmas Lambuya.",
 };
 
-export default function KontakPage() {
+// Halaman ini butuh data terbaru dari Supabase setiap kali dibuka.
+export const dynamic = "force-dynamic";
+// Wajib untuk Cloudflare Pages (next-on-pages mensyaratkan edge runtime untuk halaman dinamis)
+export const runtime = "edge";
+
+type JamPelayanan = { day: string; time: string };
+
+function parseOperationalHours(raw: string | null | undefined): JamPelayanan[] {
+  if (!raw) return SITE_CONFIG.operationalHours;
+
+  const parsed = raw
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const [day, time] = line.split("|");
+      return { day: (day ?? "").trim(), time: (time ?? "").trim() };
+    })
+    .filter((jam) => jam.day && jam.time);
+
+  return parsed.length > 0 ? parsed : SITE_CONFIG.operationalHours;
+}
+
+async function getKontakData() {
+  try {
+    const supabase = createSupabaseServerClient();
+    const { data } = await supabase.from("site_settings").select("*").eq("id", 1).single();
+
+    if (!data) return null;
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+export default async function KontakPage() {
+  const settings = await getKontakData();
+
+  const address = settings?.address || SITE_CONFIG.address;
+  const phone = settings?.phone || SITE_CONFIG.phone;
+  const whatsapp = settings?.whatsapp || SITE_CONFIG.whatsapp;
+  const email = settings?.email || SITE_CONFIG.email;
+  const mapsEmbedUrl = settings?.maps_embed_url || SITE_CONFIG.mapsEmbedUrl;
+  const operationalHours = parseOperationalHours(settings?.operational_hours);
+
   return (
     <>
       <PageHeader
@@ -26,10 +71,9 @@ export default function KontakPage() {
 
       <section className="section-y">
         <div className="container-page grid grid-cols-1 gap-8 lg:grid-cols-5">
-          {/* Google Maps */}
           <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-card lg:col-span-3">
             <iframe
-              src={SITE_CONFIG.mapsEmbedUrl}
+              src={mapsEmbedUrl}
               title="Lokasi Puskesmas Lambuya"
               className="h-[360px] w-full lg:h-full"
               loading="lazy"
@@ -37,26 +81,25 @@ export default function KontakPage() {
             />
           </div>
 
-          {/* Info kontak */}
           <div className="flex flex-col gap-3 lg:col-span-2">
-            <KontakInfoItem icon={MapPinIcon} label="Alamat" value={SITE_CONFIG.address} />
+            <KontakInfoItem icon={MapPinIcon} label="Alamat" value={address} />
             <KontakInfoItem
               icon={PhoneIcon}
               label="Telepon"
-              value={SITE_CONFIG.phone}
-              href={`tel:${SITE_CONFIG.phone.replace(/[^0-9+]/g, "")}`}
+              value={phone}
+              href={`tel:${phone.replace(/[^0-9+]/g, "")}`}
             />
             <KontakInfoItem
               icon={ChatBubbleLeftRightIcon}
               label="WhatsApp"
-              value={`+${SITE_CONFIG.whatsapp}`}
-              href={`https://wa.me/${SITE_CONFIG.whatsapp}`}
+              value={`+${whatsapp}`}
+              href={`https://wa.me/${whatsapp}`}
             />
             <KontakInfoItem
               icon={EnvelopeIcon}
               label="Email"
-              value={SITE_CONFIG.email}
-              href={`mailto:${SITE_CONFIG.email}`}
+              value={email}
+              href={`mailto:${email}`}
             />
 
             <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-card">
@@ -65,7 +108,7 @@ export default function KontakPage() {
                 Jam Pelayanan
               </div>
               <ul className="mt-2 flex flex-col gap-1.5">
-                {SITE_CONFIG.operationalHours.map((jam) => (
+                {operationalHours.map((jam) => (
                   <li
                     key={jam.day}
                     className="flex items-center justify-between text-sm text-slate-700"

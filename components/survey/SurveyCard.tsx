@@ -1,7 +1,14 @@
 import { ArrowTopRightOnSquareIcon, QrCodeIcon } from "@heroicons/react/24/outline";
-import { SURVEY_CONFIG } from "@/lib/data/survey";
 
-export default function SurveyCard() {
+type SurveyCardProps = {
+  googleFormUrl: string;
+};
+
+export default function SurveyCard({ googleFormUrl }: SurveyCardProps) {
+  const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=8&data=${encodeURIComponent(
+    googleFormUrl
+  )}`;
+
   return (
     <div className="grid grid-cols-1 gap-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-card sm:grid-cols-2 sm:p-8">
       <div className="flex flex-col items-center justify-center gap-3 rounded-xl bg-primary-50 p-6 text-center">
@@ -11,7 +18,7 @@ export default function SurveyCard() {
         </p>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={SURVEY_CONFIG.qrImageUrl}
+          src={qrImageUrl}
           alt="QR Code Survey Kepuasan Masyarakat"
           width={200}
           height={200}
@@ -30,8 +37,9 @@ export default function SurveyCard() {
             berarti bagi perbaikan layanan ke depan.
           </p>
         </div>
-        <a
-          href={SURVEY_CONFIG.googleFormUrl}
+        
+          <a
+          href={googleFormUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="btn-primary w-full sm:w-fit"
