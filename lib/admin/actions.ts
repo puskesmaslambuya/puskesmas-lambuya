@@ -110,7 +110,6 @@ export async function updateSiteSettings(formData: FormData) {
   }
 
   revalidatePath("/admin/kontak");
-  revalidatePath("/kontak");
 }
 
 /** Server Action untuk memperbarui pengaturan Survey (tabel `survey_settings`, baris tunggal id=1). */
@@ -128,7 +127,6 @@ export async function updateSurveySettings(formData: FormData) {
   }
 
   revalidatePath("/admin/survey");
-  revalidatePath("/survey");
 }
 
 /** Server Action untuk logout dari Panel Admin. */
