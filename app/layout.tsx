@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import { SITE_CONFIG } from "@/lib/constants";
 
 const poppins = Poppins({
@@ -49,6 +47,11 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Root layout HANYA berisi <html>/<body>, font, dan metadata global.
+ * Navbar & Footer situs publik dipindahkan ke app/(site)/layout.tsx agar
+ * TIDAK ikut tampil di /admin (Panel Admin punya layout & sidebar sendiri).
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -56,11 +59,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" className={`${poppins.variable} ${inter.variable}`}>
-      <body className="flex min-h-screen flex-col">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-      </body>
+      <body className="flex min-h-screen flex-col">{children}</body>
     </html>
   );
 }
