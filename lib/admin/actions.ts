@@ -1,6 +1,5 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { AdminFieldConfig } from "@/types/admin";
@@ -42,7 +41,6 @@ export async function crudCreate(
     throw new Error(error.message);
   }
 
-  revalidatePath(redirectPath);
   redirect(redirectPath);
 }
 
@@ -62,7 +60,6 @@ export async function crudUpdate(
     throw new Error(error.message);
   }
 
-  revalidatePath(redirectPath);
   redirect(redirectPath);
 }
 
@@ -74,8 +71,6 @@ export async function crudDelete(table: string, id: string, redirectPath: string
   if (error) {
     throw new Error(error.message);
   }
-
-  revalidatePath(redirectPath);
 }
 
 /** Server Action untuk memperbarui status Pengaduan (Baru/Diproses/Selesai). */
@@ -86,8 +81,6 @@ export async function updatePengaduanStatus(id: string, status: string) {
   if (error) {
     throw new Error(error.message);
   }
-
-  revalidatePath("/admin/pengaduan");
 }
 
 /** Server Action untuk memperbarui pengaturan Kontak (tabel `site_settings`, baris tunggal id=1). */
@@ -108,8 +101,6 @@ export async function updateSiteSettings(formData: FormData) {
   if (error) {
     throw new Error(error.message);
   }
-
-  revalidatePath("/admin/kontak");
 }
 
 /** Server Action untuk memperbarui pengaturan Survey (tabel `survey_settings`, baris tunggal id=1). */
@@ -125,8 +116,6 @@ export async function updateSurveySettings(formData: FormData) {
   if (error) {
     throw new Error(error.message);
   }
-
-  revalidatePath("/admin/survey");
 }
 
 /** Server Action untuk logout dari Panel Admin. */
