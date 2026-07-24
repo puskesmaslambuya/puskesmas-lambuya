@@ -161,7 +161,7 @@ export async function fetchAllFoto(): Promise<GaleriFoto[]> {
       caption: row.caption,
       category: row.category as GaleriKategori,
       date: row.tanggal,
-      color: PLACEHOLDER_COLORS[index % PLACEHOLDER_COLORS.length],
+      color: PLACEHOLDER_COLORS[index % PLACEHOLDER_COLORS.length] ?? "from-primary/25 to-primary/5",
       imageUrl: row.image_url || undefined,
     }));
   } catch {
@@ -203,7 +203,7 @@ export async function fetchAllVideo(): Promise<GaleriVideo[]> {
       description: row.description ?? "",
       date: row.tanggal,
       youtubeId: row.youtube_id,
-      thumbnailColor: PLACEHOLDER_COLORS[index % PLACEHOLDER_COLORS.length],
+      thumbnailColor: PLACEHOLDER_COLORS[index % PLACEHOLDER_COLORS.length] ?? "from-primary/25 to-primary/5",
     }));
   } catch {
     return [...DAFTAR_VIDEO].sort((a, b) => (a.date < b.date ? 1 : -1));

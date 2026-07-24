@@ -171,7 +171,7 @@ export async function fetchAllBerita(): Promise<Berita[]> {
         .filter(Boolean),
       date: row.published_at,
       author: "Admin Puskesmas Lambuya",
-      coverColor: COVER_COLORS[index % COVER_COLORS.length] ?? COVER_COLORS[0],
+      coverColor: COVER_COLORS[index % COVER_COLORS.length] ?? "from-primary/20 to-primary/5",
       coverImageUrl: row.cover_url || undefined,
     }));
   } catch {
