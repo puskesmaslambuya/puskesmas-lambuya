@@ -24,7 +24,7 @@ export const runtime = "edge";
 type JamPelayanan = { day: string; time: string };
 
 function parseOperationalHours(raw: string | null | undefined): JamPelayanan[] {
-  if (!raw) return SITE_CONFIG.operationalHours;
+  if (!raw) return [...SITE_CONFIG.operationalHours];
 
   const parsed = raw
     .split("\n")
@@ -36,7 +36,7 @@ function parseOperationalHours(raw: string | null | undefined): JamPelayanan[] {
     })
     .filter((jam) => jam.day && jam.time);
 
-  return parsed.length > 0 ? parsed : SITE_CONFIG.operationalHours;
+  return parsed.length > 0 ? parsed : [...SITE_CONFIG.operationalHours];
 }
 
 async function getKontakData() {
