@@ -20,6 +20,7 @@ export const HERO_SLIDES: HeroSlide[] = [
       "Puskesmas Lambuya berkomitmen memberikan pelayanan kesehatan dasar yang cepat, ramah, dan terjangkau bagi seluruh masyarakat Kecamatan Lambuya.",
     primaryCta: { label: "Lihat Layanan Kami", href: "/layanan" },
     secondaryCta: { label: "Jadwal Pelayanan", href: "#jadwal-pelayanan" },
+    imageUrl: "/images/gedung-puskesmas.jpg",
   },
   {
     id: "hero-2",
@@ -29,6 +30,7 @@ export const HERO_SLIDES: HeroSlide[] = [
       "Tim medis kami siap memberikan penanganan darurat kapan pun Anda membutuhkan, didukung fasilitas dan tenaga kesehatan yang kompeten.",
     primaryCta: { label: "Hubungi Kami", href: "/kontak" },
     secondaryCta: { label: "Lihat Layanan UGD", href: "/layanan/ugd" },
+    imageUrl: "/images/gedung-puskesmas.jpg",
   },
 ];
 
@@ -84,12 +86,20 @@ export const LAYANAN_UNGGULAN: LayananItem[] = [
  */
 
 export const JADWAL_PELAYANAN: JadwalItem[] = [
-  { id: "j1", poli: "Poli Umum", hari: "Senin - Kamis", jam: "08.00 - 14.00 WITA" },
-  { id: "j2", poli: "Poli Gigi", hari: "Senin, Rabu, Jumat", jam: "08.00 - 12.00 WITA" },
-  { id: "j3", poli: "KIA / KB", hari: "Senin - Sabtu", jam: "08.00 - 13.00 WITA" },
-  { id: "j4", poli: "Farmasi", hari: "Senin - Sabtu", jam: "08.00 - 14.00 WITA" },
-  { id: "j5", poli: "Laboratorium", hari: "Senin - Jumat", jam: "08.00 - 13.00 WITA" },
-  { id: "j6", poli: "UGD", hari: "Setiap Hari", jam: "24 Jam" },
+  { id: "j1", poli: "Kesehatan Ibu Hamil, Bersalin & Nifas", hari: "Senin - Jumat", jam: "08.00 - 14.00 WITA" },
+  { id: "j2", poli: "Kesehatan Bayi & Anak Balita", hari: "Senin - Jumat", jam: "08.00 - 14.00 WITA" },
+  { id: "j3", poli: "Kesehatan Anak Pra Sekolah", hari: "Senin - Jumat", jam: "08.00 - 14.00 WITA" },
+  { id: "j4", poli: "Kesehatan Anak Usia Sekolah", hari: "Senin - Jumat", jam: "08.00 - 14.00 WITA" },
+  { id: "j5", poli: "Kesehatan Remaja", hari: "Senin - Jumat", jam: "08.00 - 14.00 WITA" },
+  { id: "j6", poli: "Kesehatan Usia Dewasa", hari: "Senin - Jumat", jam: "08.00 - 14.00 WITA" },
+  { id: "j7", poli: "Kesehatan Lanjut Usia", hari: "Senin - Jumat", jam: "08.00 - 14.00 WITA" },
+  { id: "j8", poli: "Kesehatan Gigi & Mulut", hari: "Senin - Jumat", jam: "08.00 - 14.00 WITA" },
+  { id: "j9", poli: "Kefarmasian", hari: "Senin - Jumat", jam: "08.00 - 14.00 WITA" },
+  { id: "j10", poli: "Laboratorium", hari: "Senin - Jumat", jam: "08.00 - 14.00 WITA" },
+  { id: "j11", poli: "Rawat Inap", hari: "Senin - Jumat", jam: "08.00 - 14.00 WITA" },
+  { id: "j12", poli: "Rehabilitasi Medik Dasar", hari: "Senin - Jumat", jam: "08.00 - 14.00 WITA" },
+  { id: "j13", poli: "Gawat Darurat (UGD)", hari: "Setiap Hari", jam: "24 Jam" },
+  { id: "j14", poli: "Persalinan (PONED)", hari: "Setiap Hari", jam: "24 Jam" },
 ];
 
 export const STATISTIK_PUSKESMAS: StatistikItem[] = [

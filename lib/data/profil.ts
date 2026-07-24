@@ -42,7 +42,7 @@ export const MAKLUMAT_PELAYANAN: MaklumatItem[] = [
 
 export const STRUKTUR_ORGANISASI: StrukturNode = {
   id: "kepala",
-  name: "dr. Nama Kepala Puskesmas",
+  name: "SRI SUMIATI, SKM",
   role: "Kepala Puskesmas",
   children: [
     {

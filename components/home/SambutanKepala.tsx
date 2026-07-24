@@ -3,11 +3,14 @@ export default function SambutanKepala() {
     <section className="section-y bg-white">
       <div className="container-page">
         <div className="grid items-center gap-10 rounded-2xl border border-slate-100 bg-surface-muted p-6 shadow-card md:grid-cols-[280px_1fr] md:p-10">
-          {/* Foto placeholder — ganti dengan foto resmi Kepala Puskesmas */}
-          <div className="mx-auto aspect-[3/4] w-48 shrink-0 rounded-2xl bg-gradient-to-b from-primary/20 to-secondary/10 md:w-full">
-            <div className="flex h-full items-center justify-center">
-              <span className="text-sm font-medium text-slate-500">Foto Kepala Puskesmas</span>
-            </div>
+          {/* Foto resmi Kepala Puskesmas */}
+          <div className="mx-auto aspect-[3/4] w-48 shrink-0 overflow-hidden rounded-2xl bg-gradient-to-b from-primary/20 to-secondary/10 md:w-full">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/kepala-puskesmas.jpg"
+              alt="SRI SUMIATI, SKM - Kepala UPTD Puskesmas Lambuya"
+              className="h-full w-full object-cover"
+            />
           </div>
 
           <div>
@@ -24,7 +27,7 @@ export default function SambutanKepala() {
             </blockquote>
             <div className="mt-5">
               <p className="font-heading text-base font-semibold text-slate-900">
-                dr. Nama Kepala Puskesmas
+                SRI SUMIATI, SKM
               </p>
               <p className="text-sm text-slate-500">Kepala UPTD Puskesmas Lambuya</p>
             </div>
