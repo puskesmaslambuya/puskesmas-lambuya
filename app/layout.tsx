@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   },
   description:
     "Website resmi Puskesmas Lambuya, Kabupaten Konawe. Informasi layanan kesehatan, berita, jadwal pelayanan, dan pengaduan masyarakat.",
+  icons: {
+    icon: "/favicon.ico",
+  },
   keywords: [
     "Puskesmas Lambuya",
     "Puskesmas Konawe",
