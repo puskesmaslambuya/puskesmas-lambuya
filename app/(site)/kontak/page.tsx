@@ -18,13 +18,12 @@ export const metadata: Metadata = {
 
 // Halaman ini butuh data terbaru dari Supabase setiap kali dibuka.
 export const dynamic = "force-dynamic";
-// Wajib untuk Cloudflare Pages (next-on-pages mensyaratkan edge runtime untuk halaman dinamis)
 export const runtime = "edge";
 
 type JamPelayanan = { day: string; time: string };
 
 function parseOperationalHours(raw: string | null | undefined): JamPelayanan[] {
-  if (!raw) return [...SITE_CONFIG.operationalHours];
+  if (!raw) return SITE_CONFIG.operationalHours;
 
   const parsed = raw
     .split("\n")
@@ -36,7 +35,18 @@ function parseOperationalHours(raw: string | null | undefined): JamPelayanan[] {
     })
     .filter((jam) => jam.day && jam.time);
 
-  return parsed.length > 0 ? parsed : [...SITE_CONFIG.operationalHours];
+  return parsed.length > 0 ? parsed : SITE_CONFIG.operationalHours;
+}
+
+/**
+ * Ambil URL murni dari nilai "URL Embed Google Maps" di Panel Admin.
+ * Toleran terhadap 2 kemungkinan isian:
+ *  - Hanya URL: "https://www.google.com/maps/embed?pb=..."
+ *  - Tag <iframe> utuh yang di-paste dari Google Maps > Bagikan > Sematkan peta
+ */
+function extractMapsSrc(raw: string) {
+  const match = raw.match(/src="([^"]+)"/);
+  return match ? match[1] : raw;
 }
 
 async function getKontakData() {
@@ -58,7 +68,7 @@ export default async function KontakPage() {
   const phone = settings?.phone || SITE_CONFIG.phone;
   const whatsapp = settings?.whatsapp || SITE_CONFIG.whatsapp;
   const email = settings?.email || SITE_CONFIG.email;
-  const mapsEmbedUrl = settings?.maps_embed_url || SITE_CONFIG.mapsEmbedUrl;
+  const mapsEmbedUrl = extractMapsSrc(settings?.maps_embed_url || SITE_CONFIG.mapsEmbedUrl);
   const operationalHours = parseOperationalHours(settings?.operational_hours);
 
   return (
@@ -71,7 +81,6 @@ export default async function KontakPage() {
 
       <section className="section-y">
         <div className="container-page grid grid-cols-1 gap-8 lg:grid-cols-5">
-          {/* Google Maps */}
           <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-card lg:col-span-3">
             <iframe
               src={mapsEmbedUrl}
@@ -82,7 +91,6 @@ export default async function KontakPage() {
             />
           </div>
 
-          {/* Info kontak */}
           <div className="flex flex-col gap-3 lg:col-span-2">
             <KontakInfoItem icon={MapPinIcon} label="Alamat" value={address} />
             <KontakInfoItem
