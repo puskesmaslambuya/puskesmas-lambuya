@@ -11,18 +11,26 @@ import MapsSection from "@/components/home/MapsSection";
 import { getHeroSlides, getJadwalPelayanan } from "@/lib/data/home-server";
 import { fetchBeritaTerbaru } from "@/lib/data/berita";
 import { fetchFotoPreview } from "@/lib/data/galeri";
+import { getKontakData } from "@/lib/data/kontak-server";
 
-// Beranda menampilkan data terbaru dari Supabase (slider, jadwal, berita, galeri).
+// Beranda menampilkan data terbaru dari Supabase (slider, jadwal, berita, galeri, kontak).
 export const dynamic = "force-dynamic";
 export const runtime = "edge";
 
 export default async function HomePage() {
-  const [slides, jadwal, berita, foto] = await Promise.all([
+  const [slides, jadwal, berita, foto, kontak] = await Promise.all([
     getHeroSlides(),
     getJadwalPelayanan(),
     fetchBeritaTerbaru(3),
     fetchFotoPreview(4),
+    getKontakData(),
   ]);
+
+  const ugd = kontak.operationalHours.find((jam) => jam.day.toUpperCase().includes("UGD"));
+  const utama = kontak.operationalHours.find((jam) => jam !== ugd);
+  const jamLayananSingkat = [utama?.day, ugd ? `UGD ${ugd.time}` : null]
+    .filter(Boolean)
+    .join(", ");
 
   return (
     <>
@@ -35,7 +43,12 @@ export default async function HomePage() {
       <GaleriPreview foto={foto} />
       <SurveyKepuasan />
       <PengaduanSection />
-      <MapsSection />
+      <MapsSection
+        address={kontak.address}
+        phone={kontak.phone}
+        mapsEmbedUrl={kontak.mapsEmbedUrl}
+        jamLayananSingkat={jamLayananSingkat || "Senin - Sabtu, UGD 24 Jam"}
+      />
     </>
   );
 }

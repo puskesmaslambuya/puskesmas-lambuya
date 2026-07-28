@@ -8,8 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import PageHeader from "@/components/ui/PageHeader";
 import KontakInfoItem from "@/components/kontak/KontakInfoItem";
-import { SITE_CONFIG } from "@/lib/constants";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getKontakData } from "@/lib/data/kontak-server";
 
 export const metadata: Metadata = {
   title: "Kontak",
@@ -20,56 +19,9 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 export const runtime = "edge";
 
-type JamPelayanan = { day: string; time: string };
-
-function parseOperationalHours(raw: string | null | undefined): JamPelayanan[] {
-  if (!raw) return [...SITE_CONFIG.operationalHours];
-
-  const parsed = raw
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .map((line) => {
-      const [day, time] = line.split("|");
-      return { day: (day ?? "").trim(), time: (time ?? "").trim() };
-    })
-    .filter((jam) => jam.day && jam.time);
-
-  return parsed.length > 0 ? parsed : [...SITE_CONFIG.operationalHours];
-}
-
-/**
- * Ambil URL murni dari nilai "URL Embed Google Maps" di Panel Admin.
- * Toleran terhadap 2 kemungkinan isian:
- *  - Hanya URL: "https://www.google.com/maps/embed?pb=..."
- *  - Tag <iframe> utuh yang di-paste dari Google Maps > Bagikan > Sematkan peta
- */
-function extractMapsSrc(raw: string) {
-  const match = raw.match(/src="([^"]+)"/);
-  return match ? match[1] : raw;
-}
-
-async function getKontakData() {
-  try {
-    const supabase = createSupabaseServerClient();
-    const { data } = await supabase.from("site_settings").select("*").eq("id", 1).single();
-
-    if (!data) return null;
-    return data;
-  } catch {
-    return null;
-  }
-}
-
 export default async function KontakPage() {
-  const settings = await getKontakData();
-
-  const address = settings?.address || SITE_CONFIG.address;
-  const phone = settings?.phone || SITE_CONFIG.phone;
-  const whatsapp = settings?.whatsapp || SITE_CONFIG.whatsapp;
-  const email = settings?.email || SITE_CONFIG.email;
-  const mapsEmbedUrl = extractMapsSrc(settings?.maps_embed_url || SITE_CONFIG.mapsEmbedUrl);
-  const operationalHours = parseOperationalHours(settings?.operational_hours);
+  const { address, phone, whatsapp, email, mapsEmbedUrl, operationalHours } =
+    await getKontakData();
 
   return (
     <>

@@ -103,10 +103,10 @@ export const JADWAL_PELAYANAN: JadwalItem[] = [
 ];
 
 export const STATISTIK_PUSKESMAS: StatistikItem[] = [
-  { id: "s1", label: "Pasien Dilayani / Bulan", value: 1250, suffix: "+" },
-  { id: "s2", label: "Tenaga Kesehatan", value: 38 },
-  { id: "s3", label: "Desa Wilayah Kerja", value: 12 },
-  { id: "s4", label: "Tingkat Kepuasan", value: 94, suffix: "%" },
+  { id: "s1", label: "Pasien Dilayani / Bulan", value: 450 },
+  { id: "s2", label: "Tenaga Kesehatan", value: 51 },
+  { id: "s3", label: "Desa Wilayah Kerja", value: 11 },
+  { id: "s4", label: "Tingkat Kepuasan", value: 80.68, suffix: "%" },
 ];
 
 /**

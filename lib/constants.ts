@@ -9,9 +9,9 @@ export const SITE_CONFIG = {
   fullName: "Unit Pelaksana Teknis Daerah Puskesmas Lambuya",
   tagline: "Melayani Sepenuh Hati, Sehat Bersama Masyarakat",
   address: "Jl. Poros Lambuya, Kec. Lambuya, Kabupaten Konawe, Sulawesi Tenggara",
-  phone: "(0401) 123456",
-  whatsapp: "6281234567890",
-  email: "puskesmaslambuya@konawekab.go.id",
+  phone: "082357104475",
+  whatsapp: "082357104475",
+  email: "puskesmaslambuya9@gmail.com",
   operationalHours: [
     { day: "Senin - Kamis", time: "08.00 - 14.00 WITA" },
     { day: "Jumat", time: "08.00 - 11.00 WITA" },

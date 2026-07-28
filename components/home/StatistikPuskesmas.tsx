@@ -15,11 +15,13 @@ function CountUpValue({ item }: { item: StatistikItem }) {
 
     const durationMs = 1200;
     const startTime = performance.now();
+    const decimals = Number.isInteger(item.value) ? 0 : 2;
 
     function tick(now: number) {
       const progress = Math.min((now - startTime) / durationMs, 1);
       const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-      setDisplayValue(Math.round(eased * item.value));
+      const raw = eased * item.value;
+      setDisplayValue(Number(raw.toFixed(decimals)));
       if (progress < 1) requestAnimationFrame(tick);
     }
 
@@ -29,7 +31,10 @@ function CountUpValue({ item }: { item: StatistikItem }) {
 
   return (
     <span ref={ref}>
-      {displayValue.toLocaleString("id-ID")}
+      {displayValue.toLocaleString("id-ID", {
+        minimumFractionDigits: Number.isInteger(item.value) ? 0 : 2,
+        maximumFractionDigits: Number.isInteger(item.value) ? 0 : 2,
+      })}
       {item.suffix}
     </span>
   );
